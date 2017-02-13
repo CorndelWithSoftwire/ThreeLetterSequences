@@ -8,20 +8,28 @@ namespace ThreeLetterSequences
 {
   public class Part3
   {
-    public static void AnswerPart3()
+    public static void AnswerPart3(int targetFrequency)
     {
       string input = File.ReadAllText("SampleText.txt");
       var dictionary = BuildTLSDictionary(input);
 
-      Console.WriteLine($"There are {dictionary["vou"]} instances of 'vou' in the text, according on my dictionary");
+      Console.WriteLine($"There are {dictionary["vou"]} instances of 'vou' in the text, according to my dictionary");
       Console.WriteLine();
 
       foreach (var entry in dictionary)
       {
-        if (entry.Value == 99)
+        if (entry.Value == targetFrequency)
         {
-          Console.WriteLine($"There are 99 instances of {entry.Key}");
+          Console.WriteLine($"There are {targetFrequency} instances of {entry.Key}");
         }
+      }
+
+      Console.WriteLine();
+      Console.WriteLine("Most frequent TLSs:");
+
+      foreach (var entry in dictionary.OrderByDescending(entry => entry.Value).Take(10))
+      {
+        Console.WriteLine($"TLS: {entry.Key}, Frequency: {entry.Value}");
       }
     }
 

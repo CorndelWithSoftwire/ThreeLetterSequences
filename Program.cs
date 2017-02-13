@@ -7,16 +7,33 @@ namespace ThreeLetterSequences
   {
     static void Main()
     {
+      var targetFrequency = PromptForTargetFrequency();
+
       Stopwatch timer = new Stopwatch();
       timer.Start();
 
-      Part3.AnswerPart3();
+      Part3.AnswerPart3(targetFrequency);
 
       timer.Stop();
 
       Console.WriteLine();
       Console.WriteLine($"Took {timer.ElapsedMilliseconds} milliseconds");
       Console.ReadLine();
+    }
+
+    private static int PromptForTargetFrequency()
+    {
+      while (true)
+      {
+        Console.Write("What frequency of TLS would you like to look for? ");
+        var frequency = Console.ReadLine();
+
+        int ret;
+        if (int.TryParse(frequency, out ret))
+        {
+          return ret;
+        }
+      }
     }
   }
 }
