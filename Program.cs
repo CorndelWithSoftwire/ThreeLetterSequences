@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace ThreeLetterSequences
 {
@@ -6,8 +7,15 @@ namespace ThreeLetterSequences
   {
     static void Main()
     {
-      Part2.AnswerPart2();
+      Stopwatch timer = new Stopwatch();
+      timer.Start();
 
+      Part3.AnswerPart3();
+
+      timer.Stop();
+
+      Console.WriteLine();
+      Console.WriteLine($"Took {timer.ElapsedMilliseconds} milliseconds");
       Console.ReadLine();
     }
   }
