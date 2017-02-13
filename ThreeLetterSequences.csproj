@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IgnoreNonWord.cs" />
     <Compile Include="Part3.cs" />
     <Compile Include="Part2.cs" />
     <Compile Include="Part1.cs" />
