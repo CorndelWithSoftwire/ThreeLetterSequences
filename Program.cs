@@ -6,7 +6,7 @@ namespace ThreeLetterSequences
   {
     static void Main()
     {
-      Part1.AnswerPart1();
+      Part2.AnswerPart2();
 
       Console.ReadLine();
     }
