@@ -28,24 +28,9 @@ namespace ThreeLetterSequences
     {
       var dictionary = BuildTLSDictionary(input, ignoreNonWordCharacters);
 
-      Console.WriteLine($"There are {dictionary["tra"]} instances of 'tra' in the text, according to my dictionary");
-      Console.WriteLine();
-
-      foreach (var entry in dictionary)
-      {
-        if (entry.Value == targetFrequency)
-        {
-          Console.WriteLine($"There are {targetFrequency} instances of {entry.Key}");
-        }
-      }
-
-      Console.WriteLine();
-      Console.WriteLine("Most frequent TLSs:");
-
-      foreach (var entry in dictionary.OrderByDescending(entry => entry.Value).Take(10))
-      {
-        Console.WriteLine($"TLS: {entry.Key}, Frequency: {entry.Value}");
-      }
+      PrintFrequencyOfTra(dictionary);
+      PrintTLSsOfFrequency(targetFrequency, dictionary);
+      PrintMostFrequentTLSs(dictionary);
     }
 
     private static Dictionary<string, int> BuildTLSDictionary(string input, bool ignoreNonWordCharacters)
@@ -58,16 +43,50 @@ namespace ThreeLetterSequences
       foreach (Match match in regex.Matches(input))
       {
         var tls = (match.Groups[0].Value + match.Groups[1].Value + match.Groups[2].Value).ToLowerInvariant();
-
-        if (!dictionary.ContainsKey(tls))
-        {
-          dictionary.Add(tls, 0);
-        }
-
-        dictionary[tls] = dictionary[tls] + 1;
+        AddOrIncrement(dictionary, tls);
       }
 
       return dictionary;
     }
+
+    private static void AddOrIncrement<T>(Dictionary<T, int> dictionary, T key)
+    {
+      if (!dictionary.ContainsKey(key))
+      {
+        dictionary.Add(key, 0);
+      }
+
+      dictionary[key] = dictionary[key] + 1;
+    }
+
+    private static void PrintFrequencyOfTra(Dictionary<string, int> dictionary)
+    {
+      Console.WriteLine($"There are {dictionary["tra"]} instances of 'tra' in the text, according to my dictionary");
+    }
+
+    private static void PrintTLSsOfFrequency(int targetFrequency, Dictionary<string, int> dictionary)
+    {
+      Console.WriteLine();
+
+      foreach (var entry in dictionary)
+      {
+        if (entry.Value == targetFrequency)
+        {
+          Console.WriteLine($"There are {targetFrequency} instances of {entry.Key}");
+        }
+      }
+    }
+
+    private static void PrintMostFrequentTLSs(Dictionary<string, int> dictionary)
+    {
+      Console.WriteLine();
+      Console.WriteLine("Most frequent TLSs:");
+
+      foreach (var entry in dictionary.OrderByDescending(entry => entry.Value).Take(10))
+      {
+        Console.WriteLine($"TLS: {entry.Key}, Frequency: {entry.Value}");
+      }
+    }
+
   }
 }
