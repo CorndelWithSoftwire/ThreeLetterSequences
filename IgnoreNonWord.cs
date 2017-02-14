@@ -2,15 +2,30 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace ThreeLetterSequences
 {
   public class IgnoreNonWord
   {
-    public static void AnswerStretchGoal(int targetFrequency, bool ignoreNonWordCharacters)
+    public static void AnswerStretchGoalFromDisk(int targetFrequency, bool ignoreNonWordCharacters)
     {
       string input = File.ReadAllText("SampleText.txt");
+      AnswerStretchGoal(input, targetFrequency, ignoreNonWordCharacters);
+    }
+
+    public static void AnswerStretchGoalFromTheInternet(int targetFrequency, bool ignoreNonWordCharacters)
+    {
+      using (var webClient = new WebClient())
+      {
+        string input = webClient.DownloadString(@"https://en.wikipedia.org/wiki/Three-letter_acronym");
+        AnswerStretchGoal(input, targetFrequency, ignoreNonWordCharacters);
+      }
+    }
+
+    private static void AnswerStretchGoal(string input, int targetFrequency, bool ignoreNonWordCharacters)
+    {
       var dictionary = BuildTLSDictionary(input, ignoreNonWordCharacters);
 
       Console.WriteLine($"There are {dictionary["vou"]} instances of 'vou' in the text, according to my dictionary");

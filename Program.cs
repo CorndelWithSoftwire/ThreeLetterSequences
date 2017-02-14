@@ -12,7 +12,7 @@ namespace ThreeLetterSequences
       Stopwatch timer = new Stopwatch();
       timer.Start();
 
-      IgnoreNonWord.AnswerStretchGoal(targetFrequency, true);
+      IgnoreNonWord.AnswerStretchGoalFromTheInternet(targetFrequency, true);
 
       timer.Stop();
 
