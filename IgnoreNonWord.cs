@@ -28,7 +28,7 @@ namespace ThreeLetterSequences
     {
       var dictionary = BuildTLSDictionary(input, ignoreNonWordCharacters);
 
-      Console.WriteLine($"There are {dictionary["vou"]} instances of 'vou' in the text, according to my dictionary");
+      Console.WriteLine($"There are {dictionary["tra"]} instances of 'tra' in the text, according to my dictionary");
       Console.WriteLine();
 
       foreach (var entry in dictionary)

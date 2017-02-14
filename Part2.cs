@@ -9,10 +9,10 @@ namespace ThreeLetterSequences
     public static void AnswerPart2()
     {
       string input = File.ReadAllText("SampleText.txt");
-      var regex = new Regex(@"vou");
+      var regex = new Regex(@"tra", RegexOptions.IgnoreCase);
       var matches = regex.Matches(input);
 
-      Console.WriteLine($"There are {matches.Count} instances of 'vou' in the text, based on my regular expression");
+      Console.WriteLine($"There are {matches.Count} instances of 'tra' in the text, based on my regular expression");
     }
 
     public static void SurprisinglyNotWorking()
@@ -25,13 +25,13 @@ namespace ThreeLetterSequences
 
       foreach (Match match in matches)
       {
-        if (match.Value == "vou")
+        if (match.Value.ToLowerInvariant() == "tra")
         {
           counter++;
         }
       }
 
-      Console.WriteLine($"There are {counter} instances of 'vou' in the text, based on my incorrect regular expression");
+      Console.WriteLine($"There are {counter} instances of 'tra' in the text, based on my incorrect regular expression");
     }
 
     public static void ComplicatedButWorking()
@@ -44,13 +44,13 @@ namespace ThreeLetterSequences
 
       foreach (Match match in matches)
       {
-        if (match.Value == "v" && match.Groups[1].Value == "ou")
+        if (match.Value.ToLowerInvariant() == "t" && match.Groups[1].Value.ToLowerInvariant() == "ra")
         {
           counter++;
         }
       }
 
-      Console.WriteLine($"There are {counter} instances of 'vou' in the text, based on my complicated regular expression");
+      Console.WriteLine($"There are {counter} instances of 'tra' in the text, based on my complicated regular expression");
     }
 
   }
